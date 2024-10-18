@@ -1,5 +1,7 @@
 import pygame
 import time
+import Class
+from Class import PinballGame
 
 # Colores
 BLACK = (0, 0, 0)
