@@ -33,6 +33,22 @@ def recibir_datos():
         datos = cliente_socket.recv(1024).decode()
         if datos:
             print(f"Datos recibidos: {datos}")
+            manejar_comandos(datos)
+
+# Función para manejar los comandos recibidos
+def manejar_comandos(comando):
+    if comando == 'L':
+        print("Navegación izquierda")
+        # Implementar lógica de navegación izquierda
+    elif comando == 'R':
+        print("Navegación derecha")
+        # Implementar lógica de navegación derecha
+    elif comando == 'E':
+        print("Botón Enter")
+        # Implementar lógica de botón Enter
+    elif comando == 'S':
+        print("Accionar solenoide")
+        # Implementar lógica para accionar el solenoide
 
 # Hilo para recibir datos
 hilo_recibir = threading.Thread(target=recibir_datos)
@@ -47,7 +63,7 @@ imagenes_cargadas = False
 # Función para cargar imágenes de la animación
 def cargar_imagenes():
     global imagenes_animacion, imagenes_cargadas
-    imagenes_animacion = [pygame.image.load(f"Resources/animacion/{i}.png") for i in range(1, 1314)]
+    imagenes_animacion = [pygame.image.load(f"Resources/animacion/frame-{str(i).zfill(4)}.jpg") for i in range(1, 2815)]
     # Obtener el tamaño de la primera imagen para centrar todas las imágenes
     global ancho_imagen, alto_imagen, pos_x, pos_y
     ancho_imagen, alto_imagen = imagenes_animacion[0].get_size()
@@ -78,7 +94,7 @@ def pantalla_carga():
 
 # Bucle principal del juego
 pantalla_carga() 
-pygame.time.wait(10000)  # Esperar 5000 milisegundos (5 segundos)
+pygame.time.wait(20000)  # Esperar 20000 milisegundos (5 segundos)
 # Sonido y música
 pygame.mixer.music.load("Resources/Audio/Dragonball Z Budokai Tenkaichi 3 OpeningIntroHD.mp3")
 pygame.mixer.music.set_volume(0.3)
@@ -95,6 +111,6 @@ while ejecutando:
     else:
         pantalla_carga()
 
-    reloj.tick(30)  # Controlar la velocidad de la animación
+    reloj.tick(26)  # Controlar la velocidad de la animación
 
 pygame.quit()
