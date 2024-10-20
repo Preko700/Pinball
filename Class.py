@@ -1,13 +1,15 @@
+import pygame
 import random
 import serial
-import pygame
 
 class PinballGame:
     def __init__(self):
         self.score = 0
-        self.players = []
+        self.players = [{'name': 'Player 1', 'photo': 'player1.png'}, {'name': 'Player 2', 'photo': 'player2.png'}]
         self.current_player = 0
         self.serial_port = serial.Serial('/dev/ttyUSB0', 9600)
+        self.turns = 3
+        self.manual_switch = True
 
     def run(self):
         running = True
@@ -55,3 +57,7 @@ def generate_sounds():
 def communicate_with_raspberry_pi():
     # Comunicarse con la Raspberry Pi
     pass
+
+def generate_random_number():
+    # Generar un número aleatorio con distribución uniforme
+    return round(random.uniform(0, 1), 1)
