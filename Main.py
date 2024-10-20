@@ -11,19 +11,6 @@ pantalla = pygame.display.set_mode((ancho, alto))
 pygame.display.set_caption("Juego de Pinball Interactivo")
 reloj = pygame.time.Clock()
 
-# Sonido y música
-pygame.mixer.music.load("Resources/Audio/Dragonball Z Budokai Tenkaichi 3 OpeningIntroHD.mp3")
-pygame.mixer.music.set_volume(30)
-pygame.mixer.music.play(-1)
-
-# Función para mostrar la pantalla de inicio
-def pantalla_inicio():
-    pantalla.fill((0, 0, 0))
-    fuente = pygame.font.Font(None, 74)
-    texto = fuente.render("Pinball Interactivo", True, (255, 255, 255))
-    pantalla.blit(texto, (ancho // 2 - texto.get_width() // 2, alto // 3))
-    pygame.display.flip()
-
 # Conexión con la Raspberry Pi Pico W
 host = '192.168.100.30'
 port = 8266
@@ -90,7 +77,13 @@ def pantalla_carga():
     pygame.display.flip()
 
 # Bucle principal del juego
-pantalla_inicio()
+pantalla_carga() 
+pygame.time.wait(10000)  # Esperar 5000 milisegundos (5 segundos)
+# Sonido y música
+pygame.mixer.music.load("Resources/Audio/Dragonball Z Budokai Tenkaichi 3 OpeningIntroHD.mp3")
+pygame.mixer.music.set_volume(0.3)
+pygame.mixer.music.play(-1)
+
 ejecutando = True
 while ejecutando:
     for evento in pygame.event.get():
