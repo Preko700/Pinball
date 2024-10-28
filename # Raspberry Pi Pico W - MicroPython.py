@@ -102,4 +102,4 @@ while True:
             led1.value(0)
 
 # Cerrar la conexión
-conn.close()
+conn.close()    
