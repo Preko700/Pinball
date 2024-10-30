@@ -1,7 +1,34 @@
-Versión	Descripción de los Cambios
-1.0	    Conexión a Raspberry Pi: Se implementa la función iniciar_conexion para establecer la conexión del socket. Se agregan bloques try-except para manejar errores en el envío de datos y en el bucle principal, permitiendo una mejor gestión de posibles desconexiones.
-1.1	    Estructura del Proyecto: Se crea la estructura básica del proyecto, incluyendo el archivo conexion_rasp.py.
-1.2	    Expansión de Pantallas: Se añaden pantallas adicionales para configuración e información. Se mejora la navegación entre pantallas usando las teclas WASD.
-1.3	    Estructura del Juego: Se crean funciones separadas para cada pantalla del juego (presentación, configuración, información). Se refacciona el bucle principal para manejar las transiciones entre pantallas.
-1.4	    Interfaz de Usuario: Se agrega una pantalla de carga inicial con animación opcional. Se implementa un menú principal con opciones básicas (Jugar, About). Se agrega navegación por el menú usando las teclas WASD.
-1.5	    Core del Juego: Implementación básica del juego. Se incluye la reproducción de audio, manejo de eventos de teclado para pausar y el menú principal.
+# Changelog
+
+Todas las modificaciones notables a este proyecto se documentarán en este archivo.
+
+## [1.5]
+### Added
+- Implementación básica del juego.
+- Reproducción de audio.
+- Manejo de eventos de teclado para pausar y el menú principal.
+
+## [1.4]
+### Added
+- Pantalla de carga inicial con animación opcional.
+- Menú principal con opciones básicas (Jugar, About).
+- Navegación por el menú usando las teclas WASD.
+
+## [1.3]
+### Added
+- Funciones separadas para cada pantalla del juego (presentación, configuración, información).
+- Refactorización del bucle principal para manejar las transiciones entre pantallas.
+
+## [1.2]
+### Added
+- Pantallas adicionales para configuración e información.
+- Mejora de la navegación entre pantallas usando las teclas WASD.
+
+## [1.1]
+### Added
+- Estructura básica del proyecto, incluyendo el archivo `conexion_rasp.py`.
+
+## [1.0]
+### Added
+- Función `iniciar_conexion` para establecer la conexión del socket.
+- Bloques `try-except` para manejar errores en el envío de datos y en el bucle principal, permitiendo una mejor gestión de posibles desconexiones.
