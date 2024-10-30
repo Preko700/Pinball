@@ -7,6 +7,23 @@ Todas las modificaciones notables a este proyecto se documentarán en este archi
 - Implementación básica del juego.
 - Reproducción de audio.
 - Manejo de eventos de teclado para pausar y el menú principal.
+- Configuración de pines: Se configuraron los pines para los botones, zonas de anotación, registro de corrimiento y LEDs de cambio de jugador.
+- Función parpadear_leds: Parpadea los LEDs durante 3 segundos con un intervalo de 0.3 segundos.
+- Función manejar_anotacion: Maneja las anotaciones, asigna puntos según la zona y parpadea los LEDs de cambio de jugador.
+- Bucle principal: Se agregó la detección de anotaciones y el manejo de las mismas.
+- Pantalla del juego: Se agregó la función pantalla_juego para mostrar el fondo "versus.jpg", los íconos de los jugadores, sus nombres y puntajes.
+- Informar a la Raspberry Pi Pico W sobre el número de jugadores: Se agregó la línea enviar_datos(f"J{jugadores}") para informar a la Raspberry Pi Pico W sobre el número de jugadores seleccionados.
+- Reproducir la canción "Dragon Ball Z - Música de pelea (Saga de Freezer).mp3": Se agregó la lógica para reproducir la canción de fondo cuando comienza el juego.
+- Manejo de LEDs y cambio de jugador: Se agregó la lógica para cambiar de jugador y manejar los LEDs según las acciones.
+- Mantener el sonido de movimiento al presionar Enter: Se mantuvo el sonido de movimiento en formato MP3.
+- Agregar títulos "Heroes" y "Villanos" en la selección de íconos: Se agregaron los títulos "Heroes" y "Villanos" en la selección de íconos.
+- Agregar un recuadro amarillo que se posicione sobre las opciones de los íconos: Se agregó un recuadro amarillo que se posicione sobre las opciones de los íconos y permita seleccionar el ícono con Enter.
+- Selección de ícono para el segundo jugador: Se agregó la lógica para seleccionar un ícono para el segundo jugador si se selecciona el modo de dos jugadores.
+- Cargar las fotos de los autores en formato JPG.
+- Reproducir el sonido de movimiento en formato MP3.
+- Actualizar la pantalla de configuración para preguntar si el juego será para uno o dos jugadores.
+- Permitir seleccionar una imagen como ícono para el jugador.
+- Mostrar el ícono y el puntaje del jugador cuando empiece el juego.
 
 ## [1.4]
 ### Added
