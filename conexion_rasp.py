@@ -1,6 +1,7 @@
 # conexion_rasp.py
 import socket
 import threading
+import pygame
 
 cliente_socket = None
 
@@ -11,7 +12,7 @@ def conectar(host, port):
         cliente_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         cliente_socket.connect((host, port))
         print(f"Conectado a {host}:{port}")
-    except socket.error as e:
+    except Exception as e:
         print(f"Error al conectar con {host}:{port} - {e}")
         cliente_socket = None
 
@@ -32,16 +33,22 @@ def recibir_datos():
 def manejar_comandos(comando):
     if comando == 'L':
         print("Navegación izquierda")
-        # Implementar lógica de navegación izquierda
+        pygame.event.post(pygame.event.Event(pygame.KEYDOWN, key=pygame.K_a))
     elif comando == 'R':
         print("Navegación derecha")
-        # Implementar lógica de navegación derecha
+        pygame.event.post(pygame.event.Event(pygame.KEYDOWN, key=pygame.K_d))
+    elif comando == 'U':
+        print("Navegación arriba")
+        pygame.event.post(pygame.event.Event(pygame.KEYDOWN, key=pygame.K_w))
+    elif comando == 'D':
+        print("Navegación abajo")
+        pygame.event.post(pygame.event.Event(pygame.KEYDOWN, key=pygame.K_s))
     elif comando == 'E':
         print("Botón Enter")
-        # Implementar lógica de botón Enter
+        pygame.event.post(pygame.event.Event(pygame.KEYDOWN, key=pygame.K_RETURN))
     elif comando == 'S':
         print("Accionar solenoide")
-        # Implementar lógica para accionar el solenoide
+        pygame.event.post(pygame.event.Event(pygame.KEYDOWN, key=pygame.K_SPACE))
 
 # Hilo para recibir datos
 def iniciar_hilo_recepcion():
