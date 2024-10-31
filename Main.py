@@ -42,14 +42,20 @@ for key in iconos_jugadores:
     iconos_jugadores[key] = pygame.transform.scale(iconos_jugadores[key], (150, 150))
 
 # Variables del juego
-opcion_seleccionada = 0
-opcion_icono_seleccionada = 0
-jugadores = 1
-icono_jugador1 = None
-icono_jugador2 = None
-puntaje_jugador1 = 0
-puntaje_jugador2 = 0
-jugador_actual = 1
+def reiniciar_variables():
+    global opcion_seleccionada, opcion_icono_seleccionada, jugadores, icono_jugador1, icono_jugador2, puntaje_jugador1, puntaje_jugador2, jugador_actual, tiros_jugador1, tiros_jugador2
+    opcion_seleccionada = 0
+    opcion_icono_seleccionada = 0
+    jugadores = 1
+    icono_jugador1 = None
+    icono_jugador2 = None
+    puntaje_jugador1 = 0
+    puntaje_jugador2 = 0
+    jugador_actual = 1
+    tiros_jugador1 = 0
+    tiros_jugador2 = 0
+
+reiniciar_variables()
 
 # Bucle principal del juego
 pantallas.pantalla_carga(pantalla)
@@ -95,6 +101,11 @@ while ejecutando:
                         estado = "configuracion"
                     elif opcion_seleccionada == 1:
                         estado = "informacion"
+                elif estado == "ganador" or estado == "empate":
+                    estado = "menu_principal"
+                    pygame.mixer.music.stop()
+                    audios.reproducir_musica_menu()
+                    reiniciar_variables()
             elif evento.key == pygame.K_i:
                 estado = "informacion"
             elif evento.key == pygame.K_w:
@@ -113,6 +124,28 @@ while ejecutando:
                 estado = "menu_principal"
                 pygame.mixer.music.stop()
                 audios.reproducir_musica_menu()
+            elif evento.key in [pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4, pygame.K_5] and estado == "juego":
+                puntos = int(evento.unicode) * 100
+                if jugador_actual == 1:
+                    puntaje_jugador1 += puntos
+                    tiros_jugador1 += 1
+                    if tiros_jugador1 >= 3:
+                        if jugadores == 1:
+                            estado = "ganador"
+                            pygame.mixer.music.stop()
+                            audios.reproducir_musica_ganador()
+                        else:
+                            jugador_actual = 2
+                elif jugador_actual == 2:
+                    puntaje_jugador2 += puntos
+                    tiros_jugador2 += 1
+                    if tiros_jugador2 >= 3:
+                        if puntaje_jugador1 == puntaje_jugador2:
+                            estado = "empate"
+                        else:
+                            estado = "ganador"
+                        pygame.mixer.music.stop()
+                        audios.reproducir_musica_ganador()
 
     if estado == "animacion":
         if animacion.imagenes_cargadas:
@@ -130,7 +163,19 @@ while ejecutando:
     elif estado == "seleccion_icono2":
         pantallas.pantalla_seleccion_icono(pantalla, 2, opcion_icono_seleccionada, iconos_jugadores)
     elif estado == "juego":
-        pantallas.pantalla_juego(pantalla, icono_jugador1, icono_jugador2, list(iconos_jugadores.keys()), puntaje_jugador1, puntaje_jugador2, jugadores, iconos_jugadores)
+        pantallas.pantalla_juego(pantalla, icono_jugador1, icono_jugador2, list(iconos_jugadores.keys()), puntaje_jugador1, puntaje_jugador2, jugadores, jugador_actual, iconos_jugadores)
+    elif estado == "ganador":
+        if puntaje_jugador1 > puntaje_jugador2:
+            ganador_icono = icono_jugador1
+            ganador_nombre = list(iconos_jugadores.keys())[list(iconos_jugadores.values()).index(icono_jugador1)]
+            ganador_puntaje = puntaje_jugador1
+        else:
+            ganador_icono = icono_jugador2
+            ganador_nombre = list(iconos_jugadores.keys())[list(iconos_jugadores.values()).index(icono_jugador2)]
+            ganador_puntaje = puntaje_jugador2
+        pantallas.pantalla_ganador(pantalla, ganador_icono, ganador_nombre, ganador_puntaje)
+    elif estado == "empate":
+        pantallas.pantalla_empate(pantalla,icono_jugador1,icono_jugador2,list(iconos_jugadores.keys())[list(iconos_jugadores.values()).index(icono_jugador1)],list(iconos_jugadores.keys())[list(iconos_jugadores.values()).index(icono_jugador2)])
 
     reloj.tick(26)  # Controlar la velocidad de la animación
 

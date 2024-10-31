@@ -6,6 +6,8 @@ class Pantallas:
         self.alto = alto
         self.fondo_menu = pygame.image.load("Resources/Images/fondo_menu.jpg")
         self.fondo_juego = pygame.image.load("Resources/Images/versus.jpg")
+        self.fondo_ganador = pygame.image.load("Resources/Images/winner.jpg")
+        self.fondo_empate = pygame.image.load("Resources/Images/draw.jpg")
 
     def pantalla_carga(self, pantalla):
         pantalla.fill((0, 0, 0))
@@ -113,7 +115,7 @@ class Pantallas:
 
         pygame.display.flip()
 
-    def pantalla_juego(self, pantalla, icono_jugador1, icono_jugador2, nombres_iconos, puntaje_jugador1, puntaje_jugador2, jugadores, iconos_jugadores):
+    def pantalla_juego(self, pantalla, icono_jugador1, icono_jugador2, nombres_iconos, puntaje_jugador1, puntaje_jugador2, jugadores, turno, iconos_jugadores):
         pantalla.fill((0, 0, 0))  # Limpiar la pantalla
         pantalla.blit(self.fondo_juego, ((self.ancho - self.fondo_juego.get_width()) // 2, (self.alto - self.fondo_juego.get_height()) // 2))  # Mostrar fondo del juego centrado
         fuente = pygame.font.Font(None, 100)  # Fuente más grande para los datos de los jugadores
@@ -133,5 +135,42 @@ class Pantallas:
             pantalla.blit(texto_nombre, (3 * self.ancho // 4 - texto_nombre.get_width() // 2, self.alto // 2 + 50))
             texto_puntaje = fuente.render(f"Puntaje: {puntaje_jugador2}", True, (255, 255, 255))
             pantalla.blit(texto_puntaje, (3 * self.ancho // 4 - texto_puntaje.get_width() // 2, self.alto // 2 + 150))
+
+        # Mostrar turno del jugador
+        texto_turno = fuente.render(f"Turno del Jugador {turno}", True, (255, 255, 0))
+        pantalla.blit(texto_turno, (self.ancho // 2 - texto_turno.get_width() // 2, 50))
+
+        pygame.display.flip()
+
+    def pantalla_ganador(self, pantalla, icono_ganador, nombre_ganador, puntaje_ganador):
+        pantalla.blit(self.fondo_ganador, (0, 0))  # Mostrar fondo del ganador
+        fuente = pygame.font.Font(None, 100)  # Fuente más grande para los datos del ganador
+
+        # Mostrar información del ganador
+        pantalla.blit(icono_ganador, (self.ancho // 2 - 75, self.alto // 2 - 150))
+        texto_nombre = fuente.render(f"{nombre_ganador}", True, (255, 255, 255))
+        pantalla.blit(texto_nombre, (self.ancho // 2 - texto_nombre.get_width() // 2, self.alto // 2 + 50))
+        texto_puntaje = fuente.render(f"Puntaje: {puntaje_ganador}", True, (255, 255, 255))
+        pantalla.blit(texto_puntaje, (self.ancho // 2 - texto_puntaje.get_width() // 2, self.alto // 2 + 150))
+
+        pygame.display.flip()
+
+    def pantalla_empate(self, pantalla, icono_jugador1, icono_jugador2, nombre_jugador1, nombre_jugador2):
+        pantalla.blit(self.fondo_empate, (0, 0))  # Mostrar fondo del empate
+        fuente = pygame.font.Font(None, 100)  # Fuente más grande para los datos del empate
+
+        # Mostrar información del jugador 1
+        pantalla.blit(icono_jugador1, (self.ancho // 4 - 75, self.alto // 2 - 150))
+        texto_nombre1 = fuente.render(f"{nombre_jugador1}", True, (255, 255, 255))
+        pantalla.blit(texto_nombre1, (self.ancho // 4 - texto_nombre1.get_width() // 2, self.alto // 2 + 50))
+
+        # Mostrar información del jugador 2
+        pantalla.blit(icono_jugador2, (3 * self.ancho // 4 - 75, self.alto // 2 - 150))
+        texto_nombre2 = fuente.render(f"{nombre_jugador2}", True, (255, 255, 255))
+        pantalla.blit(texto_nombre2, (3 * self.ancho // 4 - texto_nombre2.get_width() // 2, self.alto // 2 + 50))
+
+        # Mostrar título de empate
+        texto_empate = fuente.render("Empate", True, (255, 255, 0))
+        pantalla.blit(texto_empate, (self.ancho // 2 - texto_empate.get_width() // 2, 50))
 
         pygame.display.flip()
